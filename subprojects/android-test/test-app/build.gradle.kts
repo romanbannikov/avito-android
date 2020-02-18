@@ -112,13 +112,14 @@ dependencies {
 extensions.getByType<GradleInstrumentationPluginConfiguration>().apply {
 
     //todo make these params optional features in plugin
-    reportApiUrl = project.getOptionalStringProperty("avito.report.url") ?: "http://stub"
-    reportApiFallbackUrl = project.getOptionalStringProperty("avito.report.fallbackUrl") ?: "http://stub"
-    reportViewerUrl = project.getOptionalStringProperty("avito.report.viewerUrl") ?: "http://stub"
+    //todo fix optionalStringProperty
+    reportApiUrl = "http://stub"
+    reportApiFallbackUrl = "http://stub"
+    reportViewerUrl = "http://stub"
     registry = project.getOptionalStringProperty("avito.registry") ?: "registry"
-    sentryDsn = project.getOptionalStringProperty("avito.instrumentaion.sentry.dsn") ?: "stub"
-    slackToken = project.getOptionalStringProperty("avito.slack.token") ?: "stub"
-    fileStorageUrl = project.getOptionalStringProperty("avito.fileStorage.url") ?: "http://stub"
+    sentryDsn = "stub"
+    slackToken = "stub"
+    fileStorageUrl = "http://stub"
 
     output = project.rootProject.file("outputs/${project.name}/instrumentation").path
 
