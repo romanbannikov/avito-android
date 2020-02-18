@@ -7,19 +7,15 @@ import kotlin.reflect.KProperty
 
 fun Project.getOptionalStringProperty(name: String): String? {
     return if (hasProperty(name)) {
-        property(name)?.toString()
+        val string = property(name)?.toString()
+        if (string.isNullOrBlank()) null else string
     } else {
         null
     }
 }
 
-fun Project.getOptionalStringProperty(name: String, default: String): String {
-    return if (hasProperty(name)) {
-        property(name)?.toString() ?: default
-    } else {
-        default
-    }
-}
+fun Project.getOptionalStringProperty(name: String, default: String): String =
+    getOptionalStringProperty(name) ?: default
 
 fun Project.getMandatoryStringProperty(name: String): String =
     getOptionalStringProperty(name) ?: throw RuntimeException("Parameter: $name is required (must be not empty)")

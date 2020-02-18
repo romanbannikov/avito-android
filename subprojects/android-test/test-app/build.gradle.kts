@@ -5,7 +5,6 @@ import com.avito.instrumentation.configuration.target.scheduling.quota.QuotaConf
 import com.avito.instrumentation.configuration.target.scheduling.reservation.TestsBasedDevicesReservationConfiguration
 import com.avito.instrumentation.reservation.request.Device.Emulator.Emulator22
 import com.avito.instrumentation.reservation.request.Device.Emulator.Emulator27
-import com.avito.kotlin.dsl.getOptionalStringProperty
 
 plugins {
     id("com.android.application")
@@ -112,14 +111,13 @@ dependencies {
 extensions.getByType<GradleInstrumentationPluginConfiguration>().apply {
 
     //todo make these params optional features in plugin
-    //todo fix optionalStringProperty
-    reportApiUrl = "http://stub"
-    reportApiFallbackUrl = "http://stub"
-    reportViewerUrl = "http://stub"
-    registry = project.getOptionalStringProperty("avito.registry") ?: "registry"
-    sentryDsn = "stub"
-    slackToken = "stub"
-    fileStorageUrl = "http://stub"
+    reportApiUrl = project.getOptionalStringProperty("avito.report.url", default = "http://stub")
+    reportApiFallbackUrl = project.getOptionalStringProperty("avito.report.fallbackUrl", default = "http://stub")
+    reportViewerUrl = project.getOptionalStringProperty("avito.report.viewerUrl", default = "http://stub")
+    registry = project.getOptionalStringProperty("avito.registry", default = "registry")
+    sentryDsn = project.getOptionalStringProperty("avito.instrumentaion.sentry.dsn", default = "stub")
+    slackToken = project.getOptionalStringProperty("avito.slack.token", default = "stub")
+    fileStorageUrl = project.getOptionalStringProperty("avito.fileStorage.url", default = "http://stub")
 
     output = project.rootProject.file("outputs/${project.name}/instrumentation").path
 
@@ -192,3 +190,15 @@ configurations.all {
         }
     }
 }
+
+fun Project.getOptionalStringProperty(name: String): String? {
+    return if (hasProperty(name)) {
+        val string = property(name)?.toString()
+        if (string.isNullOrBlank()) null else string
+    } else {
+        null
+    }
+}
+
+fun Project.getOptionalStringProperty(name: String, default: String): String =
+    getOptionalStringProperty(name) ?: default
