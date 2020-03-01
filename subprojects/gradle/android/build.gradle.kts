@@ -5,6 +5,7 @@ plugins {
 }
 
 val androidGradlePluginVersion: String by project
+val kotlinPoetVersion: String by project
 val funktionaleVersion: String by project
 
 dependencies {
@@ -17,4 +18,6 @@ dependencies {
     implementation("org.funktionale:funktionale-try:$funktionaleVersion")
 
     testImplementation(testFixtures(project(":subprojects:gradle:process")))
+    testImplementation(project(":subprojects:gradle:test-project"))
+    testImplementation("com.squareup:kotlinpoet:$kotlinPoetVersion")
 }

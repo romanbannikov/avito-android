@@ -27,6 +27,7 @@ val projectVersion: String by project
 val buildToolsVersion: String by project
 val javaVersion: String by project
 val compileSdkVersion: String by project
+val androidGradlePluginVersion: String by project
 val kotlinVersion: String by project
 val junit5Version: String by project
 val junit5PlatformVersion: String by project
@@ -230,6 +231,7 @@ subprojects {
                 systemProperty("kotlinVersion", kotlinVersion)
                 systemProperty("compileSdkVersion", compileSdkVersion)
                 systemProperty("buildToolsVersion", buildToolsVersion)
+                systemProperty("androidGradlePluginVersion", androidGradlePluginVersion)
 
                 /**
                  * IDEA добавляет специальный init script, по нему понимаем что запустили в IDE

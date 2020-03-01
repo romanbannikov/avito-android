@@ -65,7 +65,6 @@ pluginManagement {
 - `:dependencies-lint` - Gradle plugin to detect unused Gradle dependencies
 - `:design-screenshots` - Gradle plugin, extended tasks to support screenshot testing on top of our `:instrumentation` plugin
 - `:docs` - Gradle plugin to automate documentation deployment (was used to deploy internally //todo remove)
-- `:enforce-repos` - Gradle plugin to configure dependencies repositories for internal project
 - `:feature-toggles` - Gradle plugin to extract feature toggles values from code and report it as build artifact
 - `:impact`, `:impact-shared` - Gradle plugin to search parts of the project we can avoid testing based on diff. 
 - `:instrumentation-tests` - Gradle plugin to set up and run instrumentation tests on android
